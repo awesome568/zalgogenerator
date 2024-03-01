@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Appender</title>
+</head>
+<body>
+
+    <h2>Character Appender</h2>
+
+    <label for="inputText">Enter Text:</label>
+    <input type="text" id="inputText" placeholder="Type your text here">
+
+    <label for="repeatCount">Number of Repeats:</label>
+    <input type="number" id="repeatCount" placeholder="Enter repeat count">
+
+    <button onclick="appendCharacters()">Append Characters</button>
+    <button onclick="copyToClipboard()">Copy Output</button>
+
+    <h3>Output:</h3>
+    <div id="outputText"></div>
+
+    <script>
+        function appendCharacters() {
+            var inputText = document.getElementById('inputText').value;
+            var repeatCount = parseInt(document.getElementById('repeatCount').value);
+            var outputText = '';
+
+            for (var i = 0; i < inputText.length; i++) {
+                outputText += inputText[i];
+                for (var j = 0; j < repeatCount; j++) {
+                    outputText += '&#x0342;&#x0347;';
+                }
+            }
+
+            document.getElementById('outputText').innerHTML = outputText;
+        }
+
+        function copyToClipboard() {
+            var outputText = document.getElementById('outputText');
+            var range = document.createRange();
+            range.selectNode(outputText);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            alert('Output copied to clipboard!');
+        }
+    </script>
+
+</body>
+</html>
